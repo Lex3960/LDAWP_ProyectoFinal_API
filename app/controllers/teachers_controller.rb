@@ -18,7 +18,7 @@ class TeachersController < ApplicationController
     @teacher = Teacher.new(teacher_params)
 
     if @teacher.save
-      render json: @teacher, status: :created, location: @teacher
+      render json: {teacher: @teacher}, status: :created, location: @teacher
     else
       render json: @teacher.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class TeachersController < ApplicationController
   # PATCH/PUT /teachers/1
   def update
     if @teacher.update(teacher_params)
-      render json: @teacher
+      render json: {teacher: @teacher}
     else
       render json: @teacher.errors, status: :unprocessable_entity
     end

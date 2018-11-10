@@ -18,7 +18,7 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
 
     if @activity.save
-      render json: @activity, status: :created, location: @activity
+      render json: {activity: @activity}, status: :created, location: @activity
     else
       render json: @activity.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class ActivitiesController < ApplicationController
   # PATCH/PUT /activities/1
   def update
     if @activity.update(activity_params)
-      render json: @activity
+      render json: {activity: @activity}
     else
       render json: @activity.errors, status: :unprocessable_entity
     end

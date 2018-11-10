@@ -18,7 +18,7 @@ class RulesController < ApplicationController
     @rule = Rule.new(rule_params)
 
     if @rule.save
-      render json: @rule, status: :created, location: @rule
+      render json: {rule: @rule}, status: :created, location: @rule
     else
       render json: @rule.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class RulesController < ApplicationController
   # PATCH/PUT /rules/1
   def update
     if @rule.update(rule_params)
-      render json: @rule
+      render json: {rule: @rule}
     else
       render json: @rule.errors, status: :unprocessable_entity
     end

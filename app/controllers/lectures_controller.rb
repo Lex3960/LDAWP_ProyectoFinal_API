@@ -18,7 +18,7 @@ class LecturesController < ApplicationController
     @lecture = Lecture.new(lecture_params)
 
     if @lecture.save
-      render json: @lecture, status: :created, location: @lecture
+      render json: {lecture: @lecture}, status: :created, location: @lecture
     else
       render json: @lecture.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class LecturesController < ApplicationController
   # PATCH/PUT /lectures/1
   def update
     if @lecture.update(lecture_params)
-      render json: @lecture
+      render json: {lecture: @lecture}
     else
       render json: @lecture.errors, status: :unprocessable_entity
     end

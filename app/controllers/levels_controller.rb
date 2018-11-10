@@ -18,7 +18,7 @@ class LevelsController < ApplicationController
     @level = Level.new(level_params)
 
     if @level.save
-      render json: @level, status: :created, location: @level
+      render json: {level: @level}, status: :created, location: @level
     else
       render json: @level.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class LevelsController < ApplicationController
   # PATCH/PUT /levels/1
   def update
     if @level.update(level_params)
-      render json: @level
+      render json: {level: @level}
     else
       render json: @level.errors, status: :unprocessable_entity
     end

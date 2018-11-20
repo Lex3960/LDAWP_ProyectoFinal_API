@@ -3,7 +3,10 @@ class LessonsController < ApplicationController
 
   # GET /lessons
   def index
-    @lessons = Lesson.all
+    @lessons = Lesson
+    @lessons = @lessons.where(:level_id => params&.[](:level_id)) if params&.[](:level_id)
+    @lessons = @lessons.all
+
 
     render json: {lessons: @lessons}
   end
@@ -20,7 +23,7 @@ class LessonsController < ApplicationController
     if @lesson.save
       render json: {lesson: @lesson}, status: :created, location: @lesson
     else
-      render json: @lesson.errors, status: :unprocessable_entity
+      render json: {errors: @lesson.errors}, status: :unprocessable_entity
     end
   end
 

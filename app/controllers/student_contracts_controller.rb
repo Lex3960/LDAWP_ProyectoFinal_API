@@ -3,7 +3,10 @@ class StudentContractsController < ApplicationController
 
   # GET /student_contracts
   def index
-    @student_contracts = StudentContract.all
+    @student_contracts = StudentContract
+    @student_contracts = @student_contracts.where(:contract_id => params&.[](:contract_id)) if params&.[](:contract_id)
+    @student_contracts = @student_contracts.where(:student_id => params&.[](:student_id)) if params&.[](:student_id)
+    @student_contracts = @student_contracts.all
 
     render json: {student_contracts: @student_contracts}
   end

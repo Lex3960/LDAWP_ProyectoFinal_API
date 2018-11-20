@@ -7,7 +7,6 @@ class LessonsController < ApplicationController
     @lessons = @lessons.where(:level_id => params&.[](:level_id)) if params&.[](:level_id)
     @lessons = @lessons.all
 
-
     render json: {lessons: @lessons}
   end
 

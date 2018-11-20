@@ -3,7 +3,9 @@ class ActivitiesController < ApplicationController
 
   # GET /activities
   def index
-    @activities = Activity.all
+    @activities = Activity
+    @activities = @activities.where(:lesson_id => params&.[](:lesson_id)) if params&.[](:lesson_id)
+    @activities = @activities.all
 
     render json: {activities: @activities}
   end

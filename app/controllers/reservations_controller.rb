@@ -3,7 +3,10 @@ class ReservationsController < ApplicationController
 
   # GET /reservations
   def index
-    @reservations = Reservation.all
+    @reservations = Reservation
+    @reservations = @reservations.where(:class_id => params&.[](:class_id)) if params&.[](:class_id)
+    @reservations = @reservations.where(:student_id => params&.[](:student_id)) if params&.[](:student_id)
+    @reservations = @reservations.all
 
     render json: {reservations: @reservations}
   end

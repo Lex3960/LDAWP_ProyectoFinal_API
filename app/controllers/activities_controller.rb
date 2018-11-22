@@ -5,6 +5,7 @@ class ActivitiesController < ApplicationController
   def index
     @activities = Activity
     @activities = @activities.where(:lesson_id => params&.[](:lesson_id)) if params&.[](:lesson_id)
+    @activities = @activities.where(:reservation_id => params&.[](:reservation_id)) if params&.[](:reservation_id)
     @activities = @activities.all
 
     render json: {activities: @activities}
